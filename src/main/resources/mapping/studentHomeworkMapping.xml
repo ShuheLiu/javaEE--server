@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.homework.mapper.studentHomeworkMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.homework.bean.studentHomework">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="sid" jdbcType="INTEGER" property="sid" />
+        <result column="hid" jdbcType="INTEGER" property="hid" />
+        <result column="homework_content" jdbcType="VARCHAR" property="homework_content" />
+        <result column="create_time" jdbcType="BIGINT" property="create_time" />
+        <result column="update_time" jdbcType="BIGINT" property="update_time" />
+    </resultMap>
+
+    <select id="DetailHomeworkList" resultType="com.example.homework.bean.studentHomework">
+        select * from studentHomework where hid = #{hid}
+    </select>
+
+    <select id="myHomeworkList" resultType="com.example.homework.bean.studentHomework">
+        select * from studentHomework where sid = #{sid}
+    </select>
+
+    <select id="studentHomeworkList" resultType="com.example.homework.bean.studentHomework">
+        select * from studentHomework
+    </select>
+
+    <insert id="addStudentHomework" parameterType="com.example.homework.bean.studentHomework">
+        <!--<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>-->
+        insert into studentHomework (sid, hid, homework_content,create_time, update_time)
+        values (#{sid,jdbcType=INTEGER},#{hid,jdbcType=INTEGER}, #{homework_content,jdbcType=VARCHAR},
+         #{create_time,jdbcType=BIGINT},#{update_time,jdbcType=BIGINT})
+    </insert>
+
+    <update id="updateHomework" parameterType="com.example.homework.bean.studentHomework">
+        update studentHomework
+        set homework_content=#{homework_content,jdbcType=VARCHAR}, update_time=#{update_time,jdbcType=BIGINT} where id=#{id};
+    </update>
+
+
+</mapper>

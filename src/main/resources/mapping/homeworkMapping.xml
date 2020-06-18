@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.homework.mapper.homeworkMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.homework.bean.Homework">
+        <result column="hid" jdbcType="INTEGER" property="hid" />
+        <result column="tid" jdbcType="INTEGER" property="tid" />
+        <result column="htitle" jdbcType="VARCHAR" property="htitle" />
+        <result column="hcontent" jdbcType="VARCHAR" property="hcontent" />
+        <result column="start_time" jdbcType="BIGINT" property="start_time" />
+        <result column="end_time" jdbcType="BIGINT" property="end_time" />
+    </resultMap>
+
+    <select id="Sel" resultType="com.example.homework.bean.Homework">
+        select * from homework where hid = #{hid}
+    </select>
+
+    <select id="homeworkList" resultType="com.example.homework.bean.Homework">
+        select * from homework
+    </select>
+
+    <select id="ThomeworkList" resultType="com.example.homework.bean.Homework" parameterType="int">
+        select * from homework where tid = #{tid}
+    </select>
+
+    <insert id="insertHomework" parameterType="com.example.homework.bean.Homework">
+        <!--<selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>-->
+        insert into homework (tid, htitle, hcontent,start_time,end_time)
+        values (#{tid,jdbcType=INTEGER}, #{htitle,jdbcType=VARCHAR}, #{hcontent,jdbcType=VARCHAR}, #{start_time,jdbcType=BIGINT}, #{end_time,jdbcType=BIGINT})
+    </insert>
+
+    <update id="updateHome" parameterType="com.example.homework.bean.Homework">
+        update homework
+        set htitle=#{htitle,jdbcType=VARCHAR}, hcontent=#{hcontent,jdbcType=VARCHAR}, start_time=#{start_time,jdbcType=BIGINT}, end_time=#{end_time,jdbcType=BIGINT} where hid=#{hid}
+    </update>
+
+    <delete id="deleteHomework"  parameterType="com.example.homework.bean.Homework">
+        delete from homework where  hid = #{hid}
+    </delete>
+
+
+</mapper>

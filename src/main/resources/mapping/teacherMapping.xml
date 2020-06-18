@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.homework.mapper.teacherMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.homework.bean.Teacher">
+        <result column="tid" jdbcType="INTEGER" property="tid" />
+        <result column="tName" jdbcType="VARCHAR" property="tName" />
+        <result column="tPassword" jdbcType="VARCHAR" property="tPassword" />
+    </resultMap>
+
+    <select id="select" resultType="com.example.homework.bean.Teacher">
+        select * from teacher where tid = #{tid}
+    </select>
+
+    <insert id="insertTeacher" parameterType="com.example.homework.bean.Teacher">
+        <!--<selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>-->
+        insert into teacher (tid, tName, tPassword)
+        values (#{tid,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, #{tPassword,jdbcType=VARCHAR})
+    </insert>
+
+
+</mapper>
